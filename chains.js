@@ -36,8 +36,16 @@ Example.chains = function() {
 
   var group = Body.nextGroup(true);
 
+  let wormSquares = [];
+
   var ropeA = Composites.stack(200, 150, 8, 1, 0, 0, function(x, y) {
-    return Bodies.rectangle(x, y, 40, 40, { collisionFilter: { group: group } });
+    let wormSquare = Bodies.rectangle(x, y, 40, 40, { collisionFilter: { group: group } });
+    wormSquares.push({
+      body: wormSquare,
+      x: x,
+      y: y
+    });
+    return wormSquare;
   });
 
   Composites.chain(ropeA, 0.6, 0, -0.5, 0, { stiffness: 0.8, length: 2, render: { type: 'line' } });
@@ -49,14 +57,20 @@ Example.chains = function() {
     Bodies.rectangle(400, 600, 1200, 50.5, { isStatic: true })
   ]);
 
+  /*
 	var bodyA = Bodies.rectangle(300, 300, 50, 50, { isStatic: true, render: { fillStyle: '#060a19' } });
 
   Composite.add(world, bodyA);
+  */
 
 	Events.on(runner, 'afterTick', function(event) {
-    var py = 400 + 100 * Math.sin(engine.timing.timestamp * 0.002);
-    Body.setVelocity(bodyA, { x: 0, y: py - bodyA.position.y });
-    Body.setPosition(bodyA, { x: 350, y: py });
+    var py = wormSquares[0].y + Math.sin(engine.timing.timestamp * 0.002);
+    //var py = wormSquares[0].y;
+    //Body.setVelocity(wormSquares[0].body, { x: 0, y: py - wormSquares[0].body.position.y });
+    //Body.setPosition(wormSquares[0].body, { x: wormSquares[0].x, y: py });
+
+    //let value = Math.sin(engine.timing.timestamp * 0.002);
+    Body.setVelocity(wormSquares[0].body, { x: 0, y: 4 })
   });
 
   var mouse = Mouse.create(render.canvas),
