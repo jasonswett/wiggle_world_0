@@ -8,6 +8,8 @@ Example.chains = function() {
     Composite = Matter.Composite,
     Composites = Matter.Composites,
     Constraint = Matter.Constraint,
+    MouseConstraint = Matter.MouseConstraint,
+    Mouse = Matter.Mouse,
     Bodies = Matter.Bodies;
 
   var engine = Engine.create(),
@@ -54,6 +56,21 @@ Example.chains = function() {
     ropeA,
     Bodies.rectangle(400, 600, 1200, 50.5, { isStatic: true })
   ]);
+
+  var mouse = Mouse.create(render.canvas),
+    mouseConstraint = MouseConstraint.create(engine, {
+      mouse: mouse,
+      constraint: {
+        stiffness: 0.2,
+        render: {
+          visible: false
+        }
+      }
+    });
+
+  Composite.add(world, mouseConstraint);
+
+  render.mouse = mouse;
 
   // fit the render viewport to the scene
   Render.lookAt(render, {
