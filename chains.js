@@ -8,8 +8,6 @@ Example.chains = function() {
         Composite = Matter.Composite,
         Composites = Matter.Composites,
         Constraint = Matter.Constraint,
-        MouseConstraint = Matter.MouseConstraint,
-        Mouse = Matter.Mouse,
         Bodies = Matter.Bodies;
 
     // create engine
@@ -31,11 +29,9 @@ Example.chains = function() {
 
     Render.run(render);
 
-    // create runner
     var runner = Runner.create();
     Runner.run(runner, engine);
 
-    // add bodies
     var group = Body.nextGroup(true);
         
     var ropeA = Composites.stack(100, 50, 8, 1, 10, 10, function(x, y) {
@@ -56,23 +52,6 @@ Example.chains = function() {
         ropeA,
         Bodies.rectangle(400, 600, 1200, 50.5, { isStatic: true })
     ]);
-
-    // add mouse control
-    var mouse = Mouse.create(render.canvas),
-        mouseConstraint = MouseConstraint.create(engine, {
-            mouse: mouse,
-            constraint: {
-                stiffness: 0.2,
-                render: {
-                    visible: false
-                }
-            }
-        });
-
-    Composite.add(world, mouseConstraint);
-
-    // keep the mouse in sync with rendering
-    render.mouse = mouse;
 
     // fit the render viewport to the scene
     Render.lookAt(render, {
