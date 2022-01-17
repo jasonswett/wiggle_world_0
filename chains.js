@@ -63,13 +63,11 @@ Example.chains = function() {
 
   render.mouse = mouse;
 
-  // fit the render viewport to the scene
   Render.lookAt(render, {
     min: { x: 0, y: 0 },
     max: { x: 700, y: 600 }
   });
 
-  // context for MatterTools.Demo
   return {
     engine: engine,
     runner: runner,
