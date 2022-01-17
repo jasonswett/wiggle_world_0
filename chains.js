@@ -32,7 +32,7 @@ Example.chains = function() {
 
   var group = Body.nextGroup(true);
 
-  var ropeA = Composites.stack(100, 50, 8, 1, 10, 10, function(x, y) {
+  var ropeA = Composites.stack(330, 50, 8, 1, 10, 10, function(x, y) {
     return Bodies.rectangle(x, y, 40, 40, { collisionFilter: { group: group } });
   });
 
