@@ -35,20 +35,11 @@ Example.chains = function() {
 
   var group = Body.nextGroup(true);
 
-  var ropeA = Composites.stack(330, 50, 8, 1, 0, 0, function(x, y) {
+  var ropeA = Composites.stack(200, 150, 8, 1, 0, 0, function(x, y) {
     return Bodies.rectangle(x, y, 40, 40, { collisionFilter: { group: group } });
   });
 
   Composites.chain(ropeA, 0.6, 0, -0.5, 0, { stiffness: 0.8, length: 2, render: { type: 'line' } });
-
-  /*
-  Composite.add(ropeA, Constraint.create({ 
-    bodyB: ropeA.bodies[0],
-    pointB: { x: -25, y: 0 },
-    pointA: { x: ropeA.bodies[0].position.x + 40, y: ropeA.bodies[0].position.y },
-    stiffness: 0.5
-  }));
-*/
 
   group = Body.nextGroup(true);
 
