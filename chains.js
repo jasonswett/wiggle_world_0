@@ -48,7 +48,7 @@ Example.chains = function() {
     return wormSquare;
   });
 
-  Composites.chain(ropeA, 0.6, 0, -0.5, 0, { stiffness: 0.8, length: 2, render: { type: 'line' } });
+  Composites.chain(ropeA, 0.5, 0, -0.5, 0, { stiffness: 0.8, length: 0, render: { type: 'pin' } });
 
   group = Body.nextGroup(true);
 
@@ -64,13 +64,7 @@ Example.chains = function() {
   */
 
 	Events.on(runner, 'afterTick', function(event) {
-    var py = wormSquares[0].y + Math.sin(engine.timing.timestamp * 0.002);
-    //var py = wormSquares[0].y;
-    //Body.setVelocity(wormSquares[0].body, { x: 0, y: py - wormSquares[0].body.position.y });
-    //Body.setPosition(wormSquares[0].body, { x: wormSquares[0].x, y: py });
-
-    //let value = Math.sin(engine.timing.timestamp * 0.002);
-    Body.setVelocity(wormSquares[0].body, { x: 0, y: 4 })
+    Body.setVelocity(wormSquares[0].body, { x: -1, y: 4 })
   });
 
   var mouse = Mouse.create(render.canvas),
