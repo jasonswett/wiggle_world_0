@@ -5,6 +5,7 @@ Example.chains = function() {
     Render = Matter.Render,
     Runner = Matter.Runner,
     Body = Matter.Body,
+		Events = Matter.Events,
     Composite = Matter.Composite,
     Composites = Matter.Composites,
     Constraint = Matter.Constraint,
@@ -47,6 +48,16 @@ Example.chains = function() {
     ropeA,
     Bodies.rectangle(400, 600, 1200, 50.5, { isStatic: true })
   ]);
+
+	var bodyA = Bodies.rectangle(300, 300, 50, 50, { isStatic: true, render: { fillStyle: '#060a19' } });
+
+  Composite.add(world, bodyA);
+
+	Events.on(runner, 'afterTick', function(event) {
+    var py = 400 + 100 * Math.sin(engine.timing.timestamp * 0.002);
+    Body.setVelocity(bodyA, { x: 0, y: py - bodyA.position.y });
+    Body.setPosition(bodyA, { x: 350, y: py });
+  });
 
   var mouse = Mouse.create(render.canvas),
     mouseConstraint = MouseConstraint.create(engine, {
